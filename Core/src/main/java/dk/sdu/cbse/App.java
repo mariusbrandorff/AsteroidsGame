@@ -42,7 +42,7 @@ public class App extends Application{
     @Override
     public void start(Stage stage) throws Exception {
         text=new Text(10,20,"Destroyed asteroids "+ gameData.getDestroyedAsteroids());
-        enemiesText = new Text(10,20,"Destroyed enemies "+ gameData.getDestroyedEnemies());
+        enemiesText = new Text(10,40,"Destroyed enemies "+ gameData.getDestroyedEnemies());
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         gameWindow.getChildren().add(text);
         gameWindow.getChildren().add(enemiesText);
@@ -80,8 +80,41 @@ public class App extends Application{
         for (IGamePluginService iGamePlugin : getPluginServices()) {
             iGamePlugin.start(gameData, world);
         }
+        for (Entity entity : world.getEntities()) {
+            Polygon polygon = new Polygon(entity.getPolygonCoordinates());
+            polygons.put(entity, polygon);
+            gameWindow.getChildren().add(polygon);
+        }
+        render();
+        stage.setScene(scene);
+        stage.setTitle("ASTEROIDS");
+        stage.show();
+
 
     }
+    private void render() {
+        new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                update();
+                draw();
+                gameData.getKeys().update();
+            }
+        }.start();
+    }
+
+    private void update() {
+        for (IEntityProcessingService entityProcessingService : getEntityProcessingServices()) {
+            entityProcessingService.process(gameData, world);
+        }
+    }
+
+    private void draw() {
+        for (IPostEntityProcessingService postEntityProcessingService : getPostEntityProcessingServices()) {
+            postEntityProcessingService.process(gameData, world);
+        }
+    }
+
     private Collection<? extends IGamePluginService> getPluginServices() {
         return ServiceLoader.load(IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
