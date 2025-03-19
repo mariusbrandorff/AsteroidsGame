@@ -8,6 +8,12 @@
   <modules>
     <module>Core</module>
     <module>Common</module>
+    <module>CommonPlayer</module>
+    <module>Player</module>
+    <module>CommonBullet</module>
+    <module>Bullet</module>
+    <module>CommonAsteroids</module>
+    <module>Asteroids</module>
   </modules>
   <properties>
     <java>java</java>
@@ -85,10 +91,8 @@
           </arguments>
         </configuration>
       </plugin>
-
     </plugins>
   </build>
-
   <profiles>
     <profile>
       <id>parent-project</id>
@@ -115,7 +119,6 @@
           </plugin>
         </plugins>
       </build>
-
     </profile>
     <profile>
       <id>child-project</id>
