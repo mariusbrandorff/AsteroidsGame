@@ -3,7 +3,7 @@ module Core {
     requires javafx.graphics;
     requires java.desktop;
     opens dk.sdu.cbse to javafx.graphics;
-    uses dk.sdu.cbse.services.IGamePluginService;
-    uses dk.sdu.cbse.services.IEntityProcessingService;
-    uses dk.sdu.cbse.services.IPostEntityProcessingService;
+    uses dk.sdu.cbse.common.services.IGamePluginService;
+    uses dk.sdu.cbse.common.services.IEntityProcessingService;
+    uses dk.sdu.cbse.common.services.IPostEntityProcessingService;
 }

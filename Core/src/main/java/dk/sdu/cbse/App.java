@@ -1,19 +1,18 @@
 package dk.sdu.cbse;
 
-import dk.sdu.cbse.data.Entity;
-import dk.sdu.cbse.data.GameData;
-import dk.sdu.cbse.data.GameKeys;
-import dk.sdu.cbse.data.World;
+import dk.sdu.cbse.common.data.Entity;
+import dk.sdu.cbse.common.data.GameData;
+import dk.sdu.cbse.common.data.GameKeys;
+import dk.sdu.cbse.common.data.World;
 
-import java.awt.*;
 import java.util.Collection;
 import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.concurrent.ConcurrentHashMap;
 
-import dk.sdu.cbse.services.IEntityProcessingService;
-import dk.sdu.cbse.services.IGamePluginService;
-import dk.sdu.cbse.services.IPostEntityProcessingService;
+import dk.sdu.cbse.common.services.IEntityProcessingService;
+import dk.sdu.cbse.common.services.IGamePluginService;
+import dk.sdu.cbse.common.services.IPostEntityProcessingService;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -40,7 +39,7 @@ public class App extends Application{
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         text=new Text(10,20,"Destroyed asteroids "+ gameData.getDestroyedAsteroids());
         enemiesText = new Text(10,40,"Destroyed enemies "+ gameData.getDestroyedEnemies());
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
