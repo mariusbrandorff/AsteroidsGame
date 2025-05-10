@@ -5,7 +5,7 @@ import dk.sdu.cbse.common.data.World;
 
 public interface IPostEntityProcessingService {
     /**
-     * Is ran after the entities have been processed, it is basically how they are rendered into the game
+     * Is ran after the entities have been processed
      * @param gameData
      * generalized data about game
      * @param world

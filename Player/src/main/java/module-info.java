@@ -6,6 +6,4 @@ module Player {
     requires CommonPlayer;
     provides IGamePluginService with dk.sdu.cbse.playersystem.PlayerPlugin;
     provides IEntityProcessingService with dk.sdu.cbse.playersystem.PlayerProcess;
-
-
 }

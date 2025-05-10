@@ -34,7 +34,9 @@ public class World {
         List<Entity> r = new ArrayList<>();
         for (Entity e : getEntities()) {
             for (Class<E> entityType: entityTypes) {
-                r.add(e);
+                if (entityType.isAssignableFrom(e.getClass())) {
+                    r.add(e);
+                }
             }
             if (!e.getIsAlive()) {
                 removeEntity(e.getId());

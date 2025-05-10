@@ -106,11 +106,30 @@ public class App extends Application{
         for (IEntityProcessingService entityProcessingService : getEntityProcessingServices()) {
             entityProcessingService.process(gameData, world);
         }
+        for (IPostEntityProcessingService postEntityProcessingService : getPostEntityProcessingServices()) {
+            postEntityProcessingService.process(gameData, world);
+        }
     }
 
     private void draw() {
-        for (IPostEntityProcessingService postEntityProcessingService : getPostEntityProcessingServices()) {
-            postEntityProcessingService.process(gameData, world);
+        for (Entity polygonEntity : polygons.keySet()) {
+            if(!world.getEntities().contains(polygonEntity)){
+                Polygon removedPolygon = polygons.get(polygonEntity);
+                polygons.remove(polygonEntity);
+                gameWindow.getChildren().remove(removedPolygon);
+            }
+        }
+
+        for (Entity entity : world.getEntities()) {
+            Polygon polygon = polygons.get(entity);
+            if (polygon == null) {
+                polygon = new Polygon(entity.getPolygonCoordinates());
+                polygons.put(entity, polygon);
+                gameWindow.getChildren().add(polygon);
+            }
+            polygon.setTranslateX(entity.getX());
+            polygon.setTranslateY(entity.getY());
+            polygon.setRotate(entity.getRotation());
         }
     }
 

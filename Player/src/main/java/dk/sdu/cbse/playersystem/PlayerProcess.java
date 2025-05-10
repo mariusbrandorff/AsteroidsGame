@@ -42,7 +42,6 @@ public class PlayerProcess implements IEntityProcessingService {
             if (player.getY() > gameData.getDisplayHeight()) {
                 player.setY(0);
             }
-            System.out.println(player.getX());
         }
     }
 
