@@ -5,9 +5,10 @@ import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
 import dk.sdu.cbse.common.data.World;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.ServiceLoader;
+import java.lang.module.Configuration;
+import java.lang.module.ModuleFinder;
+import java.nio.file.Paths;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import dk.sdu.cbse.common.services.IEntityProcessingService;
@@ -133,15 +134,24 @@ public class App extends Application{
         }
     }
 
+    private ModuleLayer getModuleLayer() {
+        ModuleFinder finder = ModuleFinder.of(Paths.get("split-packages"));
+        ModuleLayer parent = ModuleLayer.boot();
+        List<String> modules = finder.findAll().stream().map(m -> m.descriptor().name()).collect(toList());
+        Configuration config = parent.configuration().resolve(finder, ModuleFinder.of(), modules);
+        ModuleLayer layer = parent.defineModulesWithOneLoader(config, ClassLoader.getPlatformClassLoader());
+        return layer;
+    }
+
     private Collection<? extends IGamePluginService> getPluginServices() {
-        return ServiceLoader.load(IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+        return ServiceLoader.load(getModuleLayer(), IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 
     private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
-        return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+        return ServiceLoader.load(getModuleLayer(), IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 
     private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
-        return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+        return ServiceLoader.load(getModuleLayer(), IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 }
