@@ -29,6 +29,11 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <version>${project.version}</version>
+            <artifactId>CommonBullet</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

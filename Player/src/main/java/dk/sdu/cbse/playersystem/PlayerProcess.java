@@ -1,11 +1,18 @@
 package dk.sdu.cbse.playersystem;
 
+import dk.sdu.cbse.common.bullet.BulletSPI;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.GameKeys;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.player.Player;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
+
+import java.util.Collection;
+import java.util.ServiceLoader;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class PlayerProcess implements IEntityProcessingService {
     @Override
@@ -24,7 +31,10 @@ public class PlayerProcess implements IEntityProcessingService {
                 player.setY(player.getY() + changeY);
             }
             if (gameData.getKeys().isDown(GameKeys.SPACE)) {
-                //TODO
+                getBulletSPIs().stream().findFirst().ifPresent(spi -> {
+                    world.addEntity(spi.createBullet(player, gameData));
+                });
+                System.out.println("Fire!");
             }
 
             if (player.getX() < 0) {
@@ -43,6 +53,10 @@ public class PlayerProcess implements IEntityProcessingService {
                 player.setY(0);
             }
         }
+    }
+
+    private Collection<? extends BulletSPI> getBulletSPIs() {
+        return ServiceLoader.load(BulletSPI.class).stream().map(ServiceLoader.Provider::get).collect(toList());
     }
 
 }

@@ -38,9 +38,6 @@ public class World {
                     r.add(e);
                 }
             }
-            if (!e.getIsAlive()) {
-                removeEntity(e.getId());
-            }
         }
         return r;
     }
