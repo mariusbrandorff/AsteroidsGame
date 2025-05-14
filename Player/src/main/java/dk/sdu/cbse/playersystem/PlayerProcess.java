@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 
 public class PlayerProcess implements IEntityProcessingService {
+    private int fireCooldown;
     @Override
     public void process(GameData gameData, World world) {
         for (Entity player : world.getEntities(Player.class)) {
@@ -31,10 +32,14 @@ public class PlayerProcess implements IEntityProcessingService {
                 player.setY(player.getY() + changeY);
             }
             if (gameData.getKeys().isDown(GameKeys.SPACE)) {
-                getBulletSPIs().stream().findFirst().ifPresent(spi -> {
-                    world.addEntity(spi.createBullet(player, gameData));
-                });
-                System.out.println("Fire!");
+                if (fireCooldown > 0) {
+                    fireCooldown--;
+                } else {
+                    getBulletSPIs().stream().findFirst().ifPresent(spi -> {
+                        world.addEntity(spi.createBullet(player, gameData));
+                    });
+                    fireCooldown = 10;
+                }
             }
 
             if (player.getX() < 0) {

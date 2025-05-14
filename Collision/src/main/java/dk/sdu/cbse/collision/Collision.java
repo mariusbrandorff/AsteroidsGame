@@ -28,10 +28,8 @@ public class Collision implements IPostEntityProcessingService {
                 if (!entity2.getIsAlive()) { continue; }
                 //Removes health from each entity
                 if (this.collides(entity1,entity2)) {
-                    int health1 = entity1.getHealth() -1;
-                    int health2 = entity2.getHealth() -1;
-                    entity1.setHealth(health1);
-                    entity2.setHealth(health2);
+                    entity1.setHealth(entity1.getHealth() - 1);
+                    entity2.setHealth(entity2.getHealth() - 1);
 
                     if (entity1.getHealth() <= 0) {
                         entity1.setIsAlive(false);

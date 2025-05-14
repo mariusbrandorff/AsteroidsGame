@@ -103,6 +103,11 @@ public class Game {
         for (IEntityProcessingService entityProcessingService : getEntityProcessingServices()) {
             entityProcessingService.process(gameData, world);
         }
+        for (Entity entity : world.getEntities()) {
+            if (!entity.getIsAlive()) {
+                world.removeEntity(entity);
+            }
+        }
         for (IPostEntityProcessingService postEntityProcessingService : getPostEntityProcessingServices()) {
             postEntityProcessingService.process(gameData, world);
         }
@@ -127,9 +132,6 @@ public class Game {
             polygon.setTranslateX(entity.getX());
             polygon.setTranslateY(entity.getY());
             polygon.setRotate(entity.getRotation());
-            if (!entity.getIsAlive()) {
-                world.removeEntity(entity);
-            }
         }
     }
     public List<IGamePluginService> getGamePluginServices() {
