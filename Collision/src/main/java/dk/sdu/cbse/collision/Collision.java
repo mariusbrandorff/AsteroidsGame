@@ -33,10 +33,10 @@ public class Collision implements IPostEntityProcessingService {
                     entity1.setHealth(health1);
                     entity2.setHealth(health2);
 
-                    if (health1 <= 0) {
+                    if (entity1.getHealth() <= 0) {
                         entity1.setIsAlive(false);
                     }
-                    if (health2 <= 0) {
+                    if (entity2.getHealth() <= 0) {
                         entity2.setIsAlive(false);
                     }
                 }
