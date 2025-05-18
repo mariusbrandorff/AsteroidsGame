@@ -5,6 +5,7 @@ import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.player.Player;
 import dk.sdu.cbse.common.services.IGamePluginService;
+import javafx.scene.paint.Color;
 
 public class PlayerPlugin implements IGamePluginService {
 
@@ -32,6 +33,7 @@ public class PlayerPlugin implements IGamePluginService {
         playerEntity.setHealth(3);
         playerEntity.setRadius(8);
         playerEntity.setIsAlive(true);
+        playerEntity.setColor(Color.LIMEGREEN);
         return playerEntity;
     }
 }

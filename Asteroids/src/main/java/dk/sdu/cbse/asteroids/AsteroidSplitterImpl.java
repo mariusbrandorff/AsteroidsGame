@@ -29,6 +29,8 @@ public class AsteroidSplitterImpl implements IAsteroidSplitter {
             }
             asteroid1.setPolygonCoordinates(cords1);
             asteroid2.setPolygonCoordinates(cords2);
+            asteroid1.setColor(asteroid.getColor());
+            asteroid2.setColor(asteroid.getColor());
             world.addEntity(asteroid1);
             world.addEntity(asteroid2);
         }

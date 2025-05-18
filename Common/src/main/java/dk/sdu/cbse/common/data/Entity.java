@@ -1,5 +1,6 @@
 package dk.sdu.cbse.common.data;
 
+import javafx.scene.paint.Color;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -14,6 +15,16 @@ public class Entity implements Serializable {
     private float radius;
     private int health;
     private Boolean isAlive;
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    private javafx.scene.paint.Color color;
 
     public String getId() {
         return ID.toString();

@@ -5,6 +5,7 @@ import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.enemy.Enemy;
 import dk.sdu.cbse.common.services.IGamePluginService;
+import javafx.scene.paint.Color;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -23,6 +24,7 @@ public class EnemyPlugin implements IGamePluginService {
         enemy.setRadius(8);
         enemy.setHealth(3);
         enemy.setIsAlive(true);
+        enemy.setColor(Color.DARKRED);
         return enemy;
     }
 

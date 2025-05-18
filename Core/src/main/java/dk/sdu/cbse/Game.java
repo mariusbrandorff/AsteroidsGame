@@ -11,6 +11,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -83,7 +84,7 @@ public class Game {
             polygons.put(entity, polygon);
             gameWindow.getChildren().add(polygon);
         }
-
+        scene.setFill(Color.BLACK);
         stage.setScene(scene);
         stage.setTitle("ASTEROIDS");
         stage.show();
@@ -132,6 +133,7 @@ public class Game {
             polygon.setTranslateX(entity.getX());
             polygon.setTranslateY(entity.getY());
             polygon.setRotate(entity.getRotation());
+            polygon.setFill(entity.getColor());
         }
     }
     public List<IGamePluginService> getGamePluginServices() {

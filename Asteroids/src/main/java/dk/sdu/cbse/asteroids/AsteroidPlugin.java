@@ -5,6 +5,7 @@ import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IGamePluginService;
+import javafx.scene.paint.Color;
 
 import java.util.Random;
 import java.util.concurrent.Executors;
@@ -50,6 +51,7 @@ public class AsteroidPlugin implements IGamePluginService {
         } else {
             asteroid.setHealth(3);
         }
+        asteroid.setColor(Color.GREY);
         return asteroid;
     }
 }

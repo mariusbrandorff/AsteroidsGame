@@ -6,6 +6,7 @@ import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
+import javafx.scene.paint.Color;
 
 public class BulletProcess implements IEntityProcessingService, BulletSPI {
     @Override
@@ -20,6 +21,7 @@ public class BulletProcess implements IEntityProcessingService, BulletSPI {
         bullet.setRadius(1);
         bullet.setHealth(1);
         bullet.setIsAlive(true);
+        bullet.setColor(Color.WHITESMOKE);
         return bullet;
     }
 
