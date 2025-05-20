@@ -14,7 +14,16 @@ public class Entity implements Serializable {
     private double roation;
     private float radius;
     private int health;
+    private int score;
     private Boolean isAlive;
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public Color getColor() {
         return color;

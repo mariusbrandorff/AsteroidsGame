@@ -52,6 +52,7 @@ public class AsteroidPlugin implements IGamePluginService {
             asteroid.setHealth(3);
         }
         asteroid.setColor(Color.GREY);
+        asteroid.setScore(asteroid.getHealth());
         return asteroid;
     }
 }

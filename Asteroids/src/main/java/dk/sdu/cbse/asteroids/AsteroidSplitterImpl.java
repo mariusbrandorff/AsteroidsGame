@@ -17,6 +17,8 @@ public class AsteroidSplitterImpl implements IAsteroidSplitter {
             asteroid1.setRotation(asteroid.getRotation()+45);
             asteroid1.setIsAlive(true);
             asteroid2.setIsAlive(true);
+            asteroid1.setHealth(1);
+            asteroid2.setHealth(1);
             asteroid2.setX(asteroid.getX() - (asteroid.getRadius() - 1));
             asteroid2.setY(asteroid.getY());
             double[] cords1 = new double[asteroid.getPolygonCoordinates().length];
@@ -31,6 +33,8 @@ public class AsteroidSplitterImpl implements IAsteroidSplitter {
             asteroid2.setPolygonCoordinates(cords2);
             asteroid1.setColor(asteroid.getColor());
             asteroid2.setColor(asteroid.getColor());
+            asteroid1.setScore(asteroid1.getHealth());
+            asteroid2.setScore(asteroid2.getHealth());
             world.addEntity(asteroid1);
             world.addEntity(asteroid2);
         }

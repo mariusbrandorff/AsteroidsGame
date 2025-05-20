@@ -23,6 +23,7 @@ public class EnemyPlugin implements IGamePluginService {
         enemy.setY(gameData.getDisplayHeight()*Math.random());
         enemy.setRadius(8);
         enemy.setHealth(3);
+        enemy.setScore(enemy.getHealth());
         enemy.setIsAlive(true);
         enemy.setColor(Color.DARKRED);
         return enemy;
