@@ -40,13 +40,19 @@ public class Collision implements IPostEntityProcessingService {
 
                     if (entity1.getHealth() <= 0) {
                         if (entity1 instanceof Enemy || entity1 instanceof Asteroid) {
-                            scoreSender.ifPresent(sender -> sender.sendScore(entity1.getScore()));
+                            scoreSender.ifPresent(sender -> {
+                                sender.sendScore(entity1.getScore());
+                                gameData.setDestroyedEnemies(sender.getScore());
+                            });
                         }
                         entity1.setIsAlive(false);
                     }
                     if (entity2.getHealth() <= 0) {
                         if (entity2 instanceof Enemy || entity2 instanceof Asteroid) {
-                            scoreSender.ifPresent(sender -> sender.sendScore(entity2.getScore()));
+                            scoreSender.ifPresent(sender -> {
+                                sender.sendScore(entity2.getScore());
+                                gameData.setDestroyedEnemies(sender.getScore());
+                            });;
                         }
                         entity2.setIsAlive(false);
                     }

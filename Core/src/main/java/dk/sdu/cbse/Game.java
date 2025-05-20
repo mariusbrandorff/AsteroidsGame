@@ -15,10 +15,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.util.*;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Game {
@@ -29,9 +27,7 @@ public class Game {
     private final List<IGamePluginService> gamePluginServices;
     private final List<IEntityProcessingService> entityProcessingServiceList;
     private final List<IPostEntityProcessingService> postEntityProcessingServices;
-
     Text text;
-    Text enemiesText;
 
     Game(Collection<? extends IGamePluginService> gamePluginServices, Collection<? extends IPostEntityProcessingService> gamePostEntityProcessingServices, Collection<? extends IEntityProcessingService> gameEntityProcessingServices) {
         this.gamePluginServices = (List<IGamePluginService>) gamePluginServices;
@@ -40,11 +36,10 @@ public class Game {
     }
 
     public void start(Stage stage) {
-        text=new Text(10,20,"Destroyed asteroids "+ gameData.getDestroyedAsteroids());
-        enemiesText = new Text(10,40,"Destroyed enemies "+ gameData.getDestroyedEnemies());
+        text = new Text(10,20,"Score: " + gameData.getDestroyedEnemies());
+        text.setFill(Color.WHITE);
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         gameWindow.getChildren().add(text);
-        gameWindow.getChildren().add(enemiesText);
 
         Scene scene = new Scene(gameWindow);
         scene.setOnKeyPressed(keyEvent -> {
@@ -115,6 +110,7 @@ public class Game {
     }
 
     private void draw() {
+       text.setText("Score: " + gameData.getDestroyedEnemies());
         for (Entity polygonEntity : polygons.keySet()) {
             if(!world.getEntities().contains(polygonEntity)){
                 Polygon removedPolygon = polygons.get(polygonEntity);
@@ -136,6 +132,7 @@ public class Game {
             polygon.setFill(entity.getColor());
         }
     }
+
     public List<IGamePluginService> getGamePluginServices() {
         return gamePluginServices;
     }
@@ -147,4 +144,6 @@ public class Game {
     public List<IPostEntityProcessingService> getPostEntityProcessingServices() {
         return postEntityProcessingServices;
     }
+
+
 }

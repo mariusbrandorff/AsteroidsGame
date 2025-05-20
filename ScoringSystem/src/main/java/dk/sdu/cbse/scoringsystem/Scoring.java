@@ -21,4 +21,9 @@ public class Scoring {
         scoreSum += points;
         return String.valueOf(scoreSum);
     }
+
+    @GetMapping(value = "/score/current")
+    public String scoreCurrent() {
+        return String.valueOf(scoreSum);
+    }
 }

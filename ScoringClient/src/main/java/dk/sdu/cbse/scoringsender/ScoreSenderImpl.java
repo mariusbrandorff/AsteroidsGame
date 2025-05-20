@@ -7,6 +7,7 @@ public class ScoreSenderImpl implements IScoreSender {
 
     private final RestTemplate restTemplate;
     private static final String httpUrl = "http://localhost:8080/score?points={points}";
+    private static final String getHttpUrl = "http://localhost:8080/score/current";
 
     public ScoreSenderImpl() {
         this.restTemplate = new RestTemplate();
@@ -20,6 +21,17 @@ public class ScoreSenderImpl implements IScoreSender {
             System.out.println("new score: " + newScore);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public int getScore() {
+        try {
+            String response = restTemplate.getForObject(getHttpUrl, String.class);
+            return Integer.valueOf(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
         }
     }
 }

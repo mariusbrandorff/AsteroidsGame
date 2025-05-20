@@ -28,6 +28,10 @@ public class GameData {
         return destroyedEnemies;
     }
 
+    public void setDestroyedEnemies(int destroyedEnemies) {
+        this.destroyedEnemies = destroyedEnemies;
+    }
+
     public void incrementDestroyedEnemies() {
         destroyedEnemies++;
     }
